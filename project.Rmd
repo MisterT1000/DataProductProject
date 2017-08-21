@@ -1,0 +1,32 @@
+---
+title: "Data Product Project"
+author: "MisterT1000"
+always_allow_html: yes
+---
+
+## The Stock Exchanges of New York City - Aug 20, 2017
+
+The map below shows the locations of the stock exchanges located in New York City. Each one includes a popup that links to the exchange's website.
+
+
+```{r newone}
+library(leaflet)
+
+ExchangeSites <- c(
+  "<a href='http://www.nasdaq.com/'>NASDAQ</a>",
+  "<a href='http://www.nyse.com/'>New York Stock Exchange</a>",
+  "<a href='http://www.archipelago.com/'>NYSE Arca</a>",
+  "<a href='http://www.nyse.com/markets/nyse-mkt'>NYSE MKT</a>",
+  "<a href='https://www.iextrading.com/'>IEX</a>",
+  "<a href='http://www.ise.com/'>International Securities Exchange</a>"
+)
+
+ExchangeLatLong <- data.frame(name = c("NASDAQ", "NYSE", "NYSE Arca", "NYSE MKT", "IEX", "ISE"),
+  lat = c(40.709744, 40.706833, 40.707110, 40.708725, 40.710674, 40.705364),
+  lng = c(-74.010860, -74.011028, -74.011308, -74.012633, -74.012089, -74.011729))
+
+ExchangeLatLong %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(popup = ExchangeSites)
+```
